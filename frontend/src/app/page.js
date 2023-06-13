@@ -1,13 +1,21 @@
 // import Image from 'next/image'
+"use client"
 import styles from './page.module.css';
-import Card from '../components/Tab'
+import Tab from '../components/Tab'
 import Navbar from '../components/Navbar'
-
+import MiddleComp from '@/components/MiddleComp';
+import { Container, Divider } from '@mui/material';
 export default function Home() {
   return (
     <main className={styles.main}>
       <Navbar />
-      <Card/>
+      
+      <Container>
+      <MiddleComp />
+      <Divider sx={{mt:2}}/>
+      <Tab/>
+      </Container>
+      
     </main>
   )
 }
