@@ -1,10 +1,10 @@
 import  express from "express";
 import mysql from "mysql";
 // import { getAllUser } from "./controllers/userController.js";
-import userRoute from "./routes/user.js"
+// import userRoute from "./routes/user.js"
 
 
-app.use('/api/v1',userRoute);
+// app.use('/api/v1',userRoute);
 
 
 
@@ -13,21 +13,21 @@ const app = express();
 app.use(express.json())
 // DB connection
 
-//  const connection = mysql.createConnection({
-//     host: "localhost",
-//   user: "root",
-//   password: "",
-//   database:"first"
-// });
+ const connection = mysql.createConnection({
+    host: "localhost",
+  user: "root",
+  password: "",
+  database:"first"
+});
    
-// connection.connect(function(err) {
-//   if (err) {
-//     console.error('error connecting: ' + err.stack);
-//     return;
-//   }
+connection.connect(function(err) {
+  if (err) {
+    console.error('error connecting: ' + err.stack);
+    return;
+  }
  
-//   console.log('connected as id ' + connection.threadId);
-// });
+  console.log('connected as id ' + connection.threadId);
+});
 
 // connection.query('CREATE DATABASE only',(err,result)=>{
 //     if(err) throw err;
