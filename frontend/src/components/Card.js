@@ -15,7 +15,7 @@ import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 
 export default function BasicCard({ theam }) {
   return (
-    <Card variant="outlined" sx={{ width: 320, mt: 2, pt: 4, borderTop: 4, borderColor: `${theam}` }}>
+    <Card variant="outlined" sx={{ width: 360, mt: 2, pt: 4, borderTop: 4, borderColor: `${theam}` }}>
       <div>
         <Typography level="h2" fontSize="md" sx={{ mb: 0.5 }}>
           New Meeting

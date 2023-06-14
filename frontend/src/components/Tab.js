@@ -13,7 +13,7 @@ function TabPanel(props) {
   const { children, value, index, ...other } = props;
 
   return (
-    <div
+    <Box
       role="tabpanel"
       hidden={value !== index}
       id={`simple-tabpanel-${index}`}
@@ -22,10 +22,10 @@ function TabPanel(props) {
     >
       {value === index && (
         <Box sx={{ p: 3 }}>
-          <Typography>{children}</Typography>
+          <Box>{children}</Box>
         </Box>
       )}
-    </div>
+    </Box>
   );
 }
 
@@ -63,6 +63,7 @@ export default function BasicTabs() {
           value={value}
           onChange={handleChange}
           aria-label="basic tabs example"
+          indicatorColor="none"
           sx={{
             "& button": { color: "black" },
             "& button.Mui-selected": {
@@ -81,12 +82,13 @@ export default function BasicTabs() {
 
       <TabPanel value={value} index={0} 
         sx={{
-          "div.css-19kzrtu":{padding:"0px"}
+          "& div.css-19kzrtu":{padding:"18px 0px"},
+          
         }}
       >
         <Stack
           direction="row"
-          justifyContent="space-evenly"
+          justifyContent="space-between"
           sx={{ flexWrap: "wrap" }}
         >
           <Card theam={`#1ec404`} />
