@@ -5,16 +5,18 @@ import Tab from '../components/Tab'
 import Navbar from '../components/Navbar'
 import MiddleComp from '@/components/MiddleComp';
 import { Container, Divider } from '@mui/material';
+import Test from '../components/testComp'
 export default function Home() {
   return (
     <main className={styles.main}>
-      <Navbar />
+      {/* <Navbar /> */}
       
-      <Container>
+      {/* <Container>
       <MiddleComp />
       <Divider sx={{mt:2}}/>
       <Tab/>
-      </Container>
+      </Container> */}
+      <Test />
       
     </main>
   )
