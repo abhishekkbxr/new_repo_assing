@@ -2,12 +2,11 @@
 import * as React from "react";
 import { Box, Button, Container, TextField, Typography } from "@mui/material";
 
-export default function TimePickerValue() {
+export default function Temp({ day }) {
   const [data, setData] = React.useState([{ start: "", end: "" }]);
 
   const handleClick = () => {
     setData([...data, { start: "", end: "" }]);
-    console.log("running");
   };
 
   const handleChange = (e, i) => {
@@ -24,22 +23,24 @@ export default function TimePickerValue() {
   };
 
   return (
-    <Container sx={{ display: "flex", height: "100vh" }}>
-      <Box sx={{ justifyContent: "center" }}>
-        <Box sx={{ mt: 9 }}>
+    <Container sx={{ display: "flex", my: 3, width: "50%" }}>
+      <Box sx={{ justifyContent: "center", mx: 2, display: "flex" }}>
+        <Box sx={{ mt: 3 }}>
           <Typography textAlign="center" padding="5px 0px">
-            MON
+            {day}
           </Typography>
           <Button variant="contained" sx={{ my: 2 }} onClick={handleClick}>
             Add
           </Button>
-
           {data.map((val, i) => (
             <Box
               sx={{
                 display: "flex",
                 justifyContent: "center",
                 alignItems: "center",
+                my: 1,
+                p: 0,
+                "& input": { padding: 0 },
               }}
             >
               <TextField
@@ -47,6 +48,7 @@ export default function TimePickerValue() {
                 type="time"
                 defaultValue={val.start}
                 onChange={(e) => handleChange(e, i)}
+                sx={{ mx: 1, p: 0 }}
               />
 
               <TextField
@@ -59,7 +61,7 @@ export default function TimePickerValue() {
 
               <Button
                 variant="contained"
-                sx={{ width: "10px", height: "30px", mx: 2 }}
+                sx={{ width: "10px", height: "30px", mx: 1 }}
                 onClick={() => handleDelete(i)}
               >
                 X
@@ -68,9 +70,9 @@ export default function TimePickerValue() {
           ))}
         </Box>
       </Box>
-      <Typography marginLeft="75px" marginTop="200px">
-        {JSON.stringify(data)}
-      </Typography>
+      <Box>
+        <Typography marginTop="140px">{JSON.stringify(data)}</Typography>
+      </Box>
     </Container>
   );
 }

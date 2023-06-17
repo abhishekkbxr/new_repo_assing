@@ -1,13 +1,21 @@
-import './App.css';
-import Dynamic from './Components/Dynamic';
-import Test from './Components/Test'
+import * as React from "react";
+import "./App.css";
+import Test from "./Components/Test";
+import { Container } from "@mui/material";
 
 function App() {
+  const days = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+
   return (
-    <div className="App">
-      <Test/>
-      <Dynamic />
-    </div>
+    <Container className="App">
+      <Test day={days[0]} />
+      <Test day={days[1]} />
+      <Test day={days[2]} />
+      <Test day={days[3]} />
+      <Test day={days[4]} />
+      <Test day={days[5]} />
+      <Test day={days[6]} />
+    </Container>
   );
 }
 
