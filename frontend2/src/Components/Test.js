@@ -61,7 +61,7 @@ export default function Temp({ day }) {
 
               <Button
                 variant="contained"
-                sx={{ width: "10px", height: "30px", mx: 1 }}
+                sx={{height: "28px", mx: 1 }}
                 onClick={() => handleDelete(i)}
               >
                 X
