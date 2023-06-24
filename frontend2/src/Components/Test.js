@@ -1,78 +1,122 @@
-"use client";
-import * as React from "react";
-import { Box, Button, Container, TextField, Typography } from "@mui/material";
+import React, { useState } from "react";
+import "../App.css";
 
-export default function Temp({ day }) {
-  const [data, setData] = React.useState([{ start: "", end: "" }]);
+function App() {
+  const [inputList, setInputList] = useState([
+    {
+      MON: [{ start: "", end: "" }],
+      TUE: [{ start: "", end: "" }],
+      WED: [{ start: "", end: "" }],
+      THU: [{ start: "", end: "" }],
+      FRI: [{ start: "", end: "" }],
+      SAT: [{ start: "", end: "" }],
+      SUN: [{ start: "", end: "" }],
+    },
+  ]);
 
-  const handleClick = () => {
-    setData([...data, { start: "", end: "" }]);
-  };
+  const WeekDays = ["MON", "TUE", "WED", "THU", "FRI", "SAT", "SUN"];
 
-  const handleChange = (e, i) => {
+  // handle input change
+  const handleInputChange = (e, index, KeyData) => {
     const { name, value } = e.target;
-    const changeVal = [...data];
-    changeVal[i][name] = value;
-    setData(changeVal);
+    const list = [...inputList];
+    list[0][KeyData][index][name] = value;
+    // list[index][name] = value;
+    setInputList(list);
   };
 
-  const handleDelete = (i) => {
-    const deleteVal = [...data];
-    deleteVal.splice(i, 1);
-    setData(deleteVal);
+  // handle click event of the Remove button
+  const handleRemoveClick = (index, KeyData) => {
+    // const list = [...];
+    inputList[0][KeyData].splice(index, 1);
+    const obj = [...inputList];
+    setInputList(obj);
+  };
+
+  // handle click event of the Add button
+  const handleAddClick = (index, KeyData) => {
+    // let newlist = inputList[0]["MON"];
+    // newlist.push({ start: "", end: "" });
+    inputList[0][KeyData].push({ start: "", end: "" });
+    // inputList[0]["MON"] = [...newlist];
+    const obj = [...inputList];
+    // JSON.parse(JSON.stringify(inputList, null, 2));
+    setInputList(obj);
   };
 
   return (
-    <Container sx={{ display: "flex", my: 3, width: "50%" }}>
-      <Box sx={{ justifyContent: "center", mx: 2, display: "flex" }}>
-        <Box sx={{ mt: 3 }}>
-          <Typography textAlign="center" padding="5px 0px">
-            {day}
-          </Typography>
-          <Button variant="contained" sx={{ my: 2 }} onClick={handleClick}>
-            Add
-          </Button>
-          {data.map((val, i) => (
-            <Box
-              sx={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                my: 1,
-                p: 0,
-                "& input": { padding: 0 },
-              }}
-            >
-              <TextField
-                name="start"
-                type="time"
-                defaultValue={val.start}
-                onChange={(e) => handleChange(e, i)}
-                sx={{ mx: 1, p: 0 }}
-              />
+    <div className="App bg-dark" style={{ height: "1000vh" }}>
+      <br />
+      <br />
+      <br />
+      {WeekDays.map((KeyData) => {
+        return (
+          <>
+            <div className="text-center">
+              <h3 className="text-white mb-5 mt-5">{KeyData}</h3>
+            </div>
 
-              <TextField
-                name="end"
-                type="time"
-                defaultValue={val.end}
-                onChange={(e) => handleChange(e, i)}
-                sx={{ p: 0 }}
-              />
+            {inputList[0][KeyData].map((x, i) => {
+              return (
+                <div className="row" key={i}>
+                  <div className="col-0"></div>
+                  <div className="col-6 text-right">
+                    <input
+                      className="form-control-md mx-2 my-2"
+                      type="time"
+                      name="start"
+                      placeholder="Start"
+                      value={x.start}
+                      onChange={(e) => handleInputChange(e, i, KeyData)}
+                    />
+                    <input
+                      className="form-control-md "
+                      type="time"
+                      name="end"
+                      placeholder=" End"
+                      value={x.end}
+                      onChange={(e) => handleInputChange(e, i, KeyData)}
+                    />
+                  </div>
+                  <div className="col-4 text-left">
+                    {inputList[0][KeyData].length !== 1 && (
+                      <button
+                        className="mx-2 my-2 btn-primary btn-sm"
+                        onClick={() => handleRemoveClick(i, KeyData)}
+                      >
+                        Remove
+                      </button>
+                    )}
+                    {inputList[0][KeyData].length - 1 === i && (
+                      <button
+                        className="mx-2 my-2 btn btn-primary btn-sm  "
+                        onClick={() => {
+                          handleAddClick(i, KeyData);
+                        }}
+                      >
+                        Add
+                      </button>
+                    )}
+                  </div>
+                </div>
+              );
+            })}
+            {/* second loop ends */}
+          </>
+        );
+      })}
+      {/* first loop ends */}
 
-              <Button
-                variant="contained"
-                sx={{height: "28px", mx: 1 }}
-                onClick={() => handleDelete(i)}
-              >
-                X
-              </Button>
-            </Box>
-          ))}
-        </Box>
-      </Box>
-      <Box>
-        <Typography marginTop="140px">{JSON.stringify(data)}</Typography>
-      </Box>
-    </Container>
+      <div style={{ marginTop: 20, color: "black" }}>
+        <pre style={{ color: "black", fontSize: "17px", marginLeft: "160px" }}>
+          {JSON.stringify(inputList, null, 2)}
+        </pre>
+        <br />
+        <br />
+        <br />
+      </div>
+    </div>
   );
 }
+
+export default App;
